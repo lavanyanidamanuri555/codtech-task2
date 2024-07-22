@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="dashboard row">
+            <aside class="sidebar col-md-2 bg-dark text-white p-3">
+                <div class="logo mb-4">Analytics Platform</div>
+                <nav>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link text-white" href="index.html">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="report.html">Reports</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="insight.html">Insights</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="settings.html">Settings</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <main class="main-content col-md-10 p-4">
+                <header class="header mb-4 d-flex justify-content-between align-items-center">
+                    <div class="logo">Analytics Platform</div>
+                    <div class="search-bar">
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </div>
+                    <div class="user-profile">
+                        <img src="C:\node32\projec\images\download.png" alt="User Profile" class="img-fluid rounded-circle" width="50">
+                    </div>
+                </header>
+                <section class="overview row mb-4">
+                    <div class="col-md-4">
+                        <div class="card p-3">
+                            <h3>Total Sales</h3>
+                            <p id="total-sales">$0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-3">
+                            <h3>Active Users</h3>
+                            <p id="active-users">0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-3">
+                            <h3>Conversion Rate</h3>
+                            <p id="conversion-rate">0%</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="data-visualizations row">
+                    <div class="col-md-6 mb-4">
+                        <div class="chart-container">
+                            <canvas id="sales-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="chart-container">
+                            <canvas id="user-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="chart-container">
+                            <canvas id="revenue-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="chart-container">
+                            <canvas id="traffic-chart"></canvas>
+                        </div>
+                    </div>
+                </section>
+                <section class="learning-performance row mb-4">
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <h3>Recent Activities</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">User A completed Module 1</li>
+                                <li class="list-group-item">User B started Module 2</li>
+                                <li class="list-group-item">User C completed Module 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <h3>Performance Overview</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Modules Completed</th>
+                                        <th scope="col">Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>User A</td>
+                                        <td>5</td>
+                                        <td>90%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User B</td>
+                                        <td>3</td>
+                                        <td>75%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User C</td>
+                                        <td>7</td>
+                                        <td>85%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <footer class="footer text-center mt-4">
+                    <p>Help | Support | Legal</p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        // Example of initializing charts using Chart.js
+        const salesCtx = document.getElementById('sales-chart').getContext('2d');
+        const salesChart = new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [65, 59, 80, 81, 56],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        const userCtx = document.getElementById('user-chart').getContext('2d');
+        const userChart = new Chart(userCtx, {
+            type: 'bar',
+            data: {
+                labels: ['User A', 'User B', 'User C', 'User D', 'User E'],
+                datasets: [{
+                    label: 'Active Users',
+                    data: [12, 19, 3, 5, 2],
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        const revenueCtx = document.getElementById('revenue-chart').getContext('2d');
+        const revenueChart = new Chart(revenueCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Product A', 'Product B', 'Product C'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [300, 50, 100],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        const trafficCtx = document.getElementById('traffic-chart').getContext('2d');
+        const trafficChart = new Chart(trafficCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Direct', 'Referral', 'Social'],
+                datasets: [{
+                    label: 'Traffic Sources',
+                    data: [55, 25, 20],
+                    backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                    borderColor: ['rgba(255, 159, 64, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+
+</html>
